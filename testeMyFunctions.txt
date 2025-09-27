@@ -1,0 +1,105 @@
+import Data.List (sortOn)
+import Data.List.Split (splitOn)
+
+data Campeonato = Campeonato
+  { campeonatoId :: Maybe Int
+  , campeonato   :: String
+  , dataCampo    :: String
+  , local        :: String
+  , mesa         :: String
+  , quadra       :: String
+  } deriving (Show, Eq)
+
+-- Função para ordenar campeonatos por data (YYYY-MM-DD)
+ordenarPorData :: [Campeonato] -> [Campeonato]
+ordenarPorData = sortOn dataCampo
+
+-- Divide a string da data em tupla (ano, mes, dia)
+splitData :: String -> Maybe (String, String, String)
+splitData s = case splitOn '-' s of
+  [a,m,d] -> Just (a,m,d)
+  _ -> Nothing
+
+-- Preenche zeros à esquerda para não ocorrer erro na comparação de strings
+pad2 :: Int -> String
+pad2 n = if n < 10 then '0':show n else show n
+
+-- Função de filtro por mes com base nos dias de pagamento
+intervaloMes :: String -> Campeonato -> Bool
+intervaloMes mes c =
+  case splitData (dataCampo c) of
+    Just (ano, mesCampo, dia) ->
+      let mesNum = read mes :: Int
+          mesAnt = if mesNum == 1 then 12 else mesNum - 1
+          anoAnt = if mesNum == 1 then show (read ano - 1) else ano
+          dataInicio = "28" ++ "-" ++ pad2 mesAnt ++ "-"  ++ anoAnt
+          dataFim = "27" ++ "-" ++ pad2 mesNum ++ "-" ++ ano
+          dataAtual = dia ++ "-" ++ mesCampo ++ "-" ++ ano  
+      in dataAtual >= dataInicio && dataAtual <= dataFim
+    _ -> False
+
+    
+-- Dados de teste
+campeonato1 :: Campeonato
+campeonato1 = Campeonato (Just 1) "Campeonato A" "2024-03-15" "Local A" "Mesa A" "Quadra A"
+
+campeonato2 :: Campeonato
+campeonato2 = Campeonato (Just 2) "Campeonato B" "2024-03-20" "Local B" "Mesa B" "Quadra B"
+
+campeonato3 :: Campeonato
+campeonato3 = Campeonato (Just 3) "Campeonato C" "2024-02-10" "Local C" "Mesa C" "Quadra C"
+
+campeonatosTeste :: [Campeonato]
+campeonatosTeste = [campeonato2, campeonato3, campeonato1]
+
+main :: IO ()
+main = do
+    putStrLn "=== Testes da Lógica de Arbitragem ==="
+    
+    -- Teste 1: ordenarPorData
+    putStrLn "\n1. Teste ordenarPorData:"
+    putStrLn "Lista original:"
+    mapM_ print campeonatosTeste
+    
+    putStrLn "\nLista ordenada:"
+    let ordenados = ordenarPorData campeonatosTeste
+    mapM_ print ordenados
+    
+    -- Verificação
+    if map dataCampo ordenados == ["2024-02-10", "2024-03-15", "2024-03-20"]
+        then putStrLn "✓ Ordenação correta!"
+        else putStrLn "✗ Erro na ordenação!"
+    
+    -- Teste 2: splitData
+    putStrLn "\n2. Teste splitData:"
+    putStrLn "splitData '2024-03-15':"
+    print (splitData "2024-03-15")
+    
+    putStrLn "splitData 'data-invalida':"
+    print (splitData "data-invalida")
+    
+    -- Teste 3: pad2
+    putStrLn "\n3. Teste pad2:"
+    putStrLn "pad2 5:"
+    print (pad2 5)
+    putStrLn "pad2 12:"
+    print (pad2 12)
+    
+    -- Teste 4: intervaloMes
+    putStrLn "\n4. Teste intervaloMes:"
+    putStrLn "Campeonato de 15/03/2024 no mês 3 (março):"
+    print (intervaloMes "3" campeonato1)
+    
+    putStrLn "Campeonato de 15/03/2024 no mês 4 (abril):"
+    print (intervaloMes "4" campeonato1)
+    
+    putStrLn "Campeonato de 10/02/2024 no mês 2 (fevereiro):"
+    print (intervaloMes "2" campeonato3)
+    
+    -- Teste 5: Caso especial - janeiro
+    putStrLn "\n5. Teste caso especial (janeiro):"
+    let campeonatoJan = Campeonato (Just 4) "Campeonato Jan" "2024-01-05" "Local" "Mesa" "Quadra"
+    putStrLn "Campeonato de 05/01/2024 no mês 1 (janeiro):"
+    print (intervaloMes "1" campeonatoJan)
+    
+    putStrLn "\n=== Fim dos Testes ==="
