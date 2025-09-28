@@ -1,0 +1,21 @@
+{
+  "name": "Haskell Development",
+  "dockerFile": "Dockerfile",
+  "extensions": [
+    "justusadam.language-haskell",
+    "haskell.haskell"
+  ],
+  "settings": {
+    "terminal.integrated.defaultProfile.linux": "/bin/bash",
+    "haskell.serverSet": "haskell-language-server"  
+  },
+  "forwardPorts": [3000],
+  "portsAttributes": {
+    "3000": {
+      "label": "Scotty Server",
+      "onAutoForward": "notify"
+    }
+  },
+  "postCreateCommand": "cabal update"
+}
+
