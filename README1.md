@@ -9,7 +9,7 @@ Serviço web mínimo em Haskell usando Scotty para registrar jogos nos quais o �
 
 ## Processo de desenvolvimento:
 Me baseei no exemplo de SQLite fornecido.<br>
-Defini a estrutura básica: Modelo Campeonato + CRUD + Frontend simples (fiz um esboço em um jframe de como queria e pedi pra ia copilot fazer)<br>
+Defini a estrutura básica: Modelo Campeonato + CRUD + Frontend simples (fiz um esboço em um jframe de como queria e pedi pra ia copilot fazer em HTML e JavaScript)<br>
 ![imagem front](frontimage.png)
 Implementei a função wordsWhen quando busquei pra fazer a separação da data, no inicio funcionava porém foi mais complexo de entender e ao analizar lembrei da função splitOn que era bem simples e tinha a mesma função.
 ```
