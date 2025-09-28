@@ -45,7 +45,6 @@ A solução foi montar as datas no formato `YYYY-MM-DD` (ano-mês-dia), permitin
 	- `cabal install --only-dependencies --overwrite-policy=always`
 3. Para rodar o servidor: `cabal run`
 4. Para rodar os testes: `cabal test`
-5. Exponha a porta 3000 no painel "Ports" do Codespaces para testar no navegador ou via curl/Postman.
 
 ## Resultado final
 
@@ -74,7 +73,7 @@ curl http://localhost:3000/campeonatos/mes/9
 
 ## Referências
 
--[Exemplo SQLite](https://liascript.github.io/course/?https://raw.githubusercontent.com/elc117/demo-scotty-codespace-2025b/main/README.md#8)
+- [Exemplo SQLite](https://liascript.github.io/course/?https://raw.githubusercontent.com/elc117/demo-scotty-codespace-2025b/main/README.md#8)
 - [Scotty](https://hackage.haskell.org/package/scotty-0.22/docs/Web-Scotty.html)
 - [sqlite-simple](https://hackage.haskell.org/package/sqlite-simple-0.4.19.0/docs/Database-SQLite-Simple.html)
 - [HUnit](https://hackage.haskell.org/package/HUnit-1.6.2.0/docs/Test-HUnit.html)
@@ -93,5 +92,5 @@ Alguns prompts usados:
 - "Faça um arquivo html para ficar neste estilo (imagem)"
 - "Como servir um arquivo HTML com Scotty?"
 
-Referências externas e IA foram fundamentais para acelerar o desenvolvimento e depuração.
+Referências externas e IA foram fundamentais para acelerar o desenvolvimento, depuração e compreensão.
 
