@@ -10,6 +10,22 @@
 ## Objetivo
 Serviço web mínimo em Haskell usando Scotty para registrar jogos nos quais o usuário atuou como árbitro.
 
+## Processo de desenvolvimento:
+Me baseei no exemplo de SQLite fornecido.<br>
+Defini a estrutura básica: Modelo Campeonato + CRUD + Frontend simples (fiz um esboço de como queria e pedi pra ia copilot fazer)<br>
+Implementei a função wordsWhen quando busquei pra fazer a separação da data, no inicio funcionava porém foi mais complexo de entender e ao analizar lembrei da função splitOn que era bem simples e tinha a mesma função.
+```
+wordsWhen p s = case dropWhile p s of
+  "" -> []
+  s' -> w : wordsWhen p s'' where (w, s'') = break p s'
+```
+
+Configurei o Scotty para servir arquivos estáticos e aceitar requisições:
+```
+get "/" $ file "index.html"
+```
+
+
 
 ## Endpoints principais
 - `GET /campeonatos` — lista campeonatos
