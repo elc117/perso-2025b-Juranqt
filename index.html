@@ -55,6 +55,7 @@
       </div>
     </form>
     <table id="tabela-campeonatos">
+    <!-- filtro por mes -->
     <div style="margin-bottom: 16px;">
       <label for="filtro-mes">Filtrar por mês:</label>
       <select id="filtro-mes" onchange="filtrarPorMes()">
@@ -89,6 +90,7 @@
     </table>
   </div>
   <script>
+    // armazena os campeonatos carregados do servidor
     let campeonatos = [];
   let campeonatosFiltrados = [];
     let editId = null;
