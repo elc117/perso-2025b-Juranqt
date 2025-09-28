@@ -1,18 +1,16 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/7NMOLXjY)
-
-
 # Scotty — Registro de jogos apitados
 
 
-**Autor:** SEU NOME — Curso: ...
+**Autor:** Juran Quesada Tavares — Curso: Sistema de Informação
 
 
 ## Objetivo
-Serviço web mínimo em Haskell usando Scotty para registrar jogos nos quais o usuário atuou como árbitro.
+Serviço web mínimo em Haskell usando Scotty para registrar jogos nos quais o árbitro atuou com crud e filtragem de jogos por meses conforme data de pagamento.
 
 ## Processo de desenvolvimento:
 Me baseei no exemplo de SQLite fornecido.<br>
-Defini a estrutura básica: Modelo Campeonato + CRUD + Frontend simples (fiz um esboço de como queria e pedi pra ia copilot fazer)<br>
+Defini a estrutura básica: Modelo Campeonato + CRUD + Frontend simples (fiz um esboço em um jframe de como queria e pedi pra ia copilot fazer)<br>
+![imagem front](frontimage.png)
 Implementei a função wordsWhen quando busquei pra fazer a separação da data, no inicio funcionava porém foi mais complexo de entender e ao analizar lembrei da função splitOn que era bem simples e tinha a mesma função.
 ```
 wordsWhen p s = case dropWhile p s of
@@ -20,7 +18,7 @@ wordsWhen p s = case dropWhile p s of
   s' -> w : wordsWhen p s'' where (w, s'') = break p s'
 ```
 
-Configurei o Scotty para servir arquivos estáticos e aceitar requisições:
+Tive dificuldades para fazer o html aparecer na página principal, mas ao pesquisar vi que tinha que fazer a requisição HTTP do get pro caminho raiz e enviar o arquivo index.html  
 ```
 get "/" $ file "index.html"
 ```
